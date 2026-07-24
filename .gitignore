@@ -1,0 +1,35 @@
+# OS / editors
+.DS_Store
+.idea/
+.vscode/
+*.iml
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Gradle / JVM
+.gradle/
+build/
+**/build/
+
+# Kotlin
+.kotlin/
+
+# Logs
+*.log
+
+# Docker volumes / local runtime
+.tmp/
+data/
+
+# Flutter, reserved for future mobile app
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+coverage/
+mobile/build/

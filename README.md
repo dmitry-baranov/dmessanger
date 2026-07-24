@@ -17,3 +17,4 @@
 - [План backend-разработки](docs/architecture/02-backend.md)
 - [Безопасность и шифрование](docs/architecture/03-security.md)
 - [Roadmap реализации](docs/architecture/04-roadmap.md)
+- [Backend local development](docs/backend-local-dev.md)
