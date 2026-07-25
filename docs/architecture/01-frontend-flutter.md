@@ -32,6 +32,34 @@ mobile/
 └── pubspec.yaml
 ```
 
+
+## Текущий frontend-срез
+
+Реализовано:
+
+- `mobile/` Android Flutter project;
+- тема и навигация;
+- экран входа;
+- Dio HTTP client;
+- `flutter_secure_storage` для access/refresh token;
+- автоматическое восстановление сессии через refresh token;
+- logout;
+- экран списка чатов, подключённый к `GET /api/v1/chats`;
+- экран диалога, подключённый к messages REST endpoints;
+- shell WebSocket client для будущего `/ws`;
+- экран настроек/диагностики;
+- `flutter analyze`, `flutter test`, debug APK build проходят локально.
+
+Пока не реализовано:
+
+- Drift local database;
+- production E2EE/device key flow;
+- WebSocket realtime для автоматического обновления сообщений;
+- media upload flow;
+- WebRTC calls.
+
+Важно: отправка сообщений в frontend-коде подготовлена только для roadmap iteration 4 как временный dev flow `dev-plaintext-base64`; он не должен попадать в production и должен быть заменён E2EE на iteration 6.
+
 ## Основные экраны
 
 ### Auth

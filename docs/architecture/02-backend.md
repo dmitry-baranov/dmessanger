@@ -46,6 +46,33 @@ deploy/
 - `minio` — encrypted attachments.
 - `coturn` — STUN/TURN для WebRTC.
 
+
+## Текущий backend-срез
+
+Реализовано:
+
+- health endpoints;
+- login/refresh/logout/me;
+- seed пользователей `alice/password` и `bob/password`;
+- seed direct chat между первыми двумя dev-пользователями;
+- `GET /api/v1/chats`;
+- `POST /api/v1/chats/direct`;
+- `GET /api/v1/chats/{chatId}`;
+- `GET /api/v1/chats/{chatId}/messages`;
+- `POST /api/v1/chats/{chatId}/messages`;
+- `POST /api/v1/messages/{messageId}/delivered`;
+- `POST /api/v1/messages/{messageId}/read`.
+
+Пока не реализовано:
+
+- WebSocket realtime delivery;
+- attachment upload/download API;
+- device/key bundle API;
+- production E2EE;
+- WebRTC signaling.
+
+Важно: текущая отправка сообщений поддерживает временный dev mode `dev-plaintext-base64`, чтобы Flutter UI мог показать текст до внедрения E2EE. Production flow должен отправлять только настоящий ciphertext.
+
 ## Backend-модули
 
 ### Auth

@@ -22,9 +22,9 @@ build/
 
 # Docker volumes / local runtime
 .tmp/
-data/
+/data/
 
-# Flutter, reserved for future mobile app
+# Flutter
 .dart_tool/
 .flutter-plugins
 .flutter-plugins-dependencies
@@ -33,3 +33,6 @@ data/
 .pub/
 coverage/
 mobile/build/
+
+# Local toolchains
+.tools/

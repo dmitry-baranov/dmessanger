@@ -7,3 +7,7 @@
 .env.*
 !.env.example
 mobile/build
+
+.tools
+mobile/.dart_tool
+mobile/.idea

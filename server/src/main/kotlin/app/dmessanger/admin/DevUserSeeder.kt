@@ -2,6 +2,7 @@ package app.dmessanger.admin
 
 import app.dmessanger.auth.PasswordHasher
 import app.dmessanger.auth.UserCredentialRepository
+import app.dmessanger.chats.ChatRepository
 import app.dmessanger.config.DmessangerProperties
 import app.dmessanger.users.UserRepository
 import org.slf4j.LoggerFactory
@@ -16,6 +17,7 @@ class DevUserSeeder(
     private val users: UserRepository,
     private val credentials: UserCredentialRepository,
     private val passwordHasher: PasswordHasher,
+    private val chats: ChatRepository,
 ) : ApplicationRunner {
     private val logger = LoggerFactory.getLogger(javaClass)
 
@@ -36,6 +38,18 @@ class DevUserSeeder(
                 passwordHash = passwordHasher.hash(seedUser.password),
             )
             logger.info("Seeded dev user login={}", seedUser.login)
+        }
+
+        if (properties.seed.users.size >= 2) {
+            chats.ensureDevDirectChat(
+                firstLogin = properties.seed.users[0].login,
+                secondLogin = properties.seed.users[1].login,
+            )
+            logger.info(
+                "Ensured dev direct chat between {} and {}",
+                properties.seed.users[0].login,
+                properties.seed.users[1].login,
+            )
         }
     }
 }

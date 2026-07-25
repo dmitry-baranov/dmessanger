@@ -22,6 +22,44 @@ curl -X POST http://localhost:8080/api/v1/auth/login \
 
 MinIO Console: `http://localhost:9001`.
 
+
+## Flutter Android local development
+
+Local SDK/tool installations can live under `.tools/` and are ignored by git. In this workspace they were installed at:
+
+```text
+.tools/flutter
+.tools/android-sdk
+.tools/jdk-21
+.tools/gradle
+```
+
+Backend checks with local JDK/Gradle:
+
+```bash
+JAVA_HOME="$PWD/.tools/jdk-21" PATH="$PWD/.tools/jdk-21/bin:$PATH" .tools/gradle/bin/gradle test
+```
+
+Mobile build and checks:
+
+```bash
+cd mobile
+../.tools/flutter/bin/flutter pub get
+../.tools/flutter/bin/flutter analyze
+../.tools/flutter/bin/flutter test
+../.tools/flutter/bin/flutter build apk --debug
+```
+
+Run from an Android emulator against the Docker backend:
+
+```bash
+../.tools/flutter/bin/flutter run \
+  --dart-define=DMESSANGER_API_BASE_URL=http://10.0.2.2:8080 \
+  --dart-define=DMESSANGER_WS_BASE_URL=ws://10.0.2.2:8080/ws
+```
+
+Use `alice/password` or `bob/password` for local login.
+
 ## Текущий backend-срез
 
 Реализовано:
@@ -33,12 +71,17 @@ MinIO Console: `http://localhost:9001`.
 - подключение PostgreSQL/Redis через конфигурацию;
 - Flyway initial schema;
 - Dockerfile;
-- Docker Compose для backend, PostgreSQL, Redis, MinIO, COTURN.
+- Docker Compose для backend, PostgreSQL, Redis, MinIO, COTURN;
+- REST API списка чатов;
+- REST API истории и отправки сообщений;
+- статусы delivered/read;
+- dev direct chat между `alice` и `bob`.
 
 Пока не реализовано:
 
-- бизнес-API чатов и сообщений;
-- WebSocket;
-- WebRTC signaling.
+- WebSocket realtime delivery;
+- attachment upload/download API;
+- WebRTC signaling;
+- production E2EE/device key flow.
 
-Следующий шаг — device/key bundle API для E2EE и затем базовые chats/messages API.
+Следующий шаг — WebSocket realtime delivery для `message.created`, затем device/key bundle API и production E2EE.
